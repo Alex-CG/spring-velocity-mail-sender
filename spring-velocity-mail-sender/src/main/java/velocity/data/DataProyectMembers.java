@@ -9,9 +9,9 @@ import velocity.pojo.ProyMembersTemplate;
 
 public class DataProyectMembers {
 
-  private ProyMembersTemplate dataTemplate;
+  private static ProyMembersTemplate dataTemplate;
 
-  public ProyMembersTemplate getData() {
+  public static ProyMembersTemplate getData() {
 
     dataTemplate = new ProyMembersTemplate();
 
@@ -91,7 +91,7 @@ public class DataProyectMembers {
     personas.add(se3);
 
     dataTemplate.setTitulo("Miembros del Proyecto");
-    dataTemplate.setSubtitulo("La siguiente lista detalla los trabajadores agrupados por cargos :");
+    dataTemplate.setSubtitulo("La siguiente lista detalla los trabajadores y sus cargos :");
     dataTemplate.setPersonas(personas);
 
     return dataTemplate;

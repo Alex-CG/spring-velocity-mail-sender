@@ -2,14 +2,18 @@ package service.impl;
 
 import javax.mail.internet.MimeMessage;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import service.MailSenderService;
 import service.request.RequestEmail;
 import service.response.ResponseEmail;
 import service.util.ServiceCodes;
+import base.TipoContenido;
+import base.util.MapFromBeanUtil;
 
 /**
  * Servicio de envio de e-mail
@@ -17,9 +21,11 @@ import service.util.ServiceCodes;
 public class MailSenderServiceImpl implements MailSenderService {
 
   private JavaMailSender sender;
+  private VelocityEngine velocityEngine;
 
-  public MailSenderServiceImpl(final JavaMailSender sender) {
+  public MailSenderServiceImpl(final JavaMailSender sender, final VelocityEngine velocityEngine) {
     this.sender = sender;
+    this.velocityEngine = velocityEngine;
   }
 
   @Override
@@ -38,7 +44,20 @@ public class MailSenderServiceImpl implements MailSenderService {
         helper.setTo(to);
         helper.setFrom(from);
         helper.setSubject(request.getAsunto());
-        helper.setText(request.getContenido());
+
+        String contenido = request.getTextoContenido();
+
+        if (TipoContenido.PLANTILLA.getCodigo().equals(request.getTipoContenido())) {
+
+          String rutaPlantilla = request.getRutaPlanilla();
+
+          contenido = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, rutaPlantilla,
+              MapFromBeanUtil.convertir(request.getObjetoContenido()));
+
+        }
+
+        helper.setText(contenido);
+
       }
     };
 
@@ -47,5 +66,4 @@ public class MailSenderServiceImpl implements MailSenderService {
     response.setEnviado(enviado);
     return response;
   }
-
 }

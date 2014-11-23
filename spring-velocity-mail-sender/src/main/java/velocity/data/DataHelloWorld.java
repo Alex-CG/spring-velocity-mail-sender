@@ -4,9 +4,9 @@ import velocity.pojo.HelloWorldTemplate;
 
 public class DataHelloWorld {
 
-  private HelloWorldTemplate dataTemplate;
+  private static HelloWorldTemplate dataTemplate;
 
-  public HelloWorldTemplate getData() {
+  public static HelloWorldTemplate getData() {
 
     dataTemplate = new HelloWorldTemplate();
     dataTemplate.setName("Alex");

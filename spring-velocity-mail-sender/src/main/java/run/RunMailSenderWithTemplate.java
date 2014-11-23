@@ -5,8 +5,11 @@ import model.Persona;
 import service.MailSenderService;
 import service.request.RequestEmail;
 import service.response.ResponseEmail;
+import velocity.data.DataProyectMembers;
+import base.Plantilla;
+import base.TipoContenido;
 
-public class RunMailSender extends RunMailSenderBase {
+public class RunMailSenderWithTemplate extends RunMailSenderBase {
 
   private static Persona remitente;
   private static Persona destinatario;
@@ -29,10 +32,13 @@ public class RunMailSender extends RunMailSenderBase {
 
   public static void main(String[] args) {
     RequestEmail request = new RequestEmail();
-    request.setAsunto("Test application.");
+    request.setAsunto("Test application with template.");
     request.setRemitente(remitente.getEmailAddress());
     request.setDestinatario(destinatario.getEmailAddress());
-    request.setTextoContenido("I am testing a mail sender with spring.");
+
+    request.setTipoContenido(TipoContenido.PLANTILLA.getCodigo());
+    request.setObjetoContenido(DataProyectMembers.getData());
+    request.setRutaPlanilla(Plantilla.PROYECT_MEMBERS.getPathWithFileName());
 
     iniciandoEnvioMail();
 

@@ -9,6 +9,7 @@ import org.apache.velocity.app.VelocityEngine;
 import velocity.data.DataProyectMembers;
 import velocity.pojo.ProyMembersTemplate;
 import base.Constante;
+import base.Plantilla;
 import base.util.MapFromBeanUtil;
 
 public class MiembrosProyecto implements Constante {
@@ -17,11 +18,11 @@ public class MiembrosProyecto implements Constante {
 
     VelocityEngine engine = new VelocityEngine();
 
-//    engine.init();
+    // engine.init();
 
-    Template template = engine.getTemplate(CLASSPATH_TEMPLATES + "project-members.template");
+    Template template = engine.getTemplate(Plantilla.PROYECT_MEMBERS.getClassPathWithFileName());
 
-    final ProyMembersTemplate dataTemplate = new DataProyectMembers().getData();
+    final ProyMembersTemplate dataTemplate = DataProyectMembers.getData();
 
     VelocityContext context = new VelocityContext(MapFromBeanUtil.convertir(dataTemplate));
 

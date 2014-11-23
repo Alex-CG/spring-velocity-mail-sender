@@ -27,7 +27,7 @@ public class MapFromBeanUtil {
   }
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public static Map<String, Object> parsear(Object obj) throws IllegalArgumentException,
+  private static Map<String, Object> parsear(Object obj) throws IllegalArgumentException,
       IllegalAccessException {
 
     // Se iteran todos los campos

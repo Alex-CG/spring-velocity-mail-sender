@@ -9,6 +9,7 @@ import org.apache.velocity.app.VelocityEngine;
 import velocity.data.DataHelloWorld;
 import velocity.pojo.HelloWorldTemplate;
 import base.Constante;
+import base.Plantilla;
 import base.util.MapFromBeanUtil;
 
 public class HelloWorld implements Constante {
@@ -19,9 +20,9 @@ public class HelloWorld implements Constante {
 
     // engine.init();
 
-    Template template = engine.getTemplate(CLASSPATH_TEMPLATES + "hello-world.template");
+    Template template = engine.getTemplate(Plantilla.HELLO_WORLD.getClassPathWithFileName());
 
-    HelloWorldTemplate dataTemplate = new DataHelloWorld().getData();
+    HelloWorldTemplate dataTemplate = DataHelloWorld.getData();
 
     VelocityContext context = new VelocityContext(MapFromBeanUtil.convertir(dataTemplate));
 
@@ -32,5 +33,4 @@ public class HelloWorld implements Constante {
     System.out.println(writer.toString());
 
   }
-
 }
