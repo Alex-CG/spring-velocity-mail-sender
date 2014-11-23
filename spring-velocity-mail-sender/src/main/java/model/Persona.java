@@ -8,6 +8,7 @@ public class Persona implements EmailAddress {
   private String nombres;
   private String apellidos;
   private String email;
+  private Cargo cargo;
 
   public String getNombres() {
     return nombres;
@@ -33,6 +34,14 @@ public class Persona implements EmailAddress {
   @Override
   public void setEmailAddress(String email) {
     this.email = email;
+  }
+
+  public Cargo getCargo() {
+    return cargo;
+  }
+
+  public void setCargo(Cargo cargo) {
+    this.cargo = cargo;
   }
 
 }

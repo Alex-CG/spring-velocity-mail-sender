@@ -1,7 +1,7 @@
 package service;
 
-import request.RequestEmail;
-import response.ResponseEmail;
+import service.request.RequestEmail;
+import service.response.ResponseEmail;
 
 /**
  * Interface para el servicio de mail

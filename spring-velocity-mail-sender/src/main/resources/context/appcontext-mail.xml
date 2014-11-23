@@ -22,7 +22,7 @@
     </property>
   </bean>
 
-  <bean id="mailService" class="service.MailSenderServiceImpl">
+  <bean id="mailService" class="service.impl.MailSenderServiceImpl">
     <constructor-arg index="0" ref="mailSender" />
   </bean>
 

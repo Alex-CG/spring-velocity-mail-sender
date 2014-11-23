@@ -2,9 +2,10 @@ package run;
 
 import loader.SpringContextLoader;
 import model.Persona;
-import request.RequestEmail;
-import response.ResponseEmail;
 import service.MailSenderService;
+import service.request.RequestEmail;
+import service.response.ResponseEmail;
+import service.util.ServiceCodes;
 
 public class RunMailSender {
 
@@ -30,23 +31,24 @@ public class RunMailSender {
   public static void main(String[] args) {
     RequestEmail request = new RequestEmail();
     request.setAsunto("Test application.");
-    request.setRemitente(remitente);
-    request.setDestinatario(destinatario);
-    request.setContenido("I am testing an mail sender with spring.");
+    request.setRemitente(remitente.getEmailAddress());
+    request.setDestinatario(destinatario.getEmailAddress());
+    request.setContenido("I am testing a mail sender with spring.");
 
     iniciandoEnvioMail();
 
     ResponseEmail response = senderService.enviarCorreo(request);
 
-    finDeEnvioMail(response.isEnviado());
+    finDeEnvioMail(response.getEnviado());
   }
 
   private static void iniciandoEnvioMail() {
     System.out.println("Iniciando el envio de mail ... ");
   }
 
-  private static void finDeEnvioMail(final boolean enviado) {
-    System.out.println(enviado ? "Envio de e-mail exitoso. " : "Envio de e-mail fallido.");
+  private static void finDeEnvioMail(final String enviado) {
+    System.out.println(ServiceCodes.ENVIADO.equals(enviado) ? "Envio de e-mail exitoso. "
+        : "Envio de e-mail fallido.");
   }
 
 }

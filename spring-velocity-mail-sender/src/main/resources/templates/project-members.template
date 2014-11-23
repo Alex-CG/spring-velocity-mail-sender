@@ -1,0 +1,23 @@
+<html>
+ <head></head>
+ <title></title>
+ <body>
+  $titulo
+   <br>
+   $subtitulo
+   <br>
+   Cantidad de recursos: $personas.size()
+   <br>
+
+   <table>
+#foreach($persona in $personas)
+     <tr>
+      <td>$persona.nombres</td>
+      <td>$persona.apellidos</td>
+      <td>$persona.cargo.nombre</td>
+     </tr>
+#end
+    </table>
+
+  </body>
+</html>
